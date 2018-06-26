@@ -16,6 +16,7 @@ class CSubNet;
 class CAddrMan;
 class CDataStream;
 
+// 禁止枚举常量
 typedef enum BanReason
 {
     BanReasonUnknown          = 0,
