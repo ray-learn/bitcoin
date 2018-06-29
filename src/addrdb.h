@@ -16,12 +16,12 @@ class CSubNet;
 class CAddrMan;
 class CDataStream;
 
-// 禁止枚举常量
+// 禁止原因枚举常量
 typedef enum BanReason
 {
-    BanReasonUnknown          = 0,
-    BanReasonNodeMisbehaving  = 1,
-    BanReasonManuallyAdded    = 2
+    BanReasonUnknown          = 0,  // 未知
+    BanReasonNodeMisbehaving  = 1,  // 节点误操作
+    BanReasonManuallyAdded    = 2   // 手动添加
 } BanReason;
 
 class CBanEntry
@@ -38,6 +38,7 @@ public:
         SetNull();
     }
 
+    // 显式构造函数，int64_t的形参nCreateTimeIn赋予公有成员nCreateTime
     explicit CBanEntry(int64_t nCreateTimeIn)
     {
         SetNull();
@@ -46,6 +47,7 @@ public:
 
     ADD_SERIALIZE_METHODS;
 
+    // 序列化操作
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
         READWRITE(this->nVersion);
@@ -78,6 +80,7 @@ public:
 typedef std::map<CSubNet, CBanEntry> banmap_t;
 
 /** Access to the (IP) address database (peers.dat) */
+/** 访问IP地址数据库 (peers.dat) */
 class CAddrDB
 {
 private:
